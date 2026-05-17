@@ -82,3 +82,8 @@ This is a systems-focused prototype intended to demonstrate gameplay architectur
 - External assets were removed to keep the repository lightweight.
 
 This project focuses on gameplay systems and logic implementation.
+
+This is a stripped version of the project.
+- Retargeted player animations were not included due to size constraints
+- - The focus of this repository is gameplay systems, not visual assets
+
