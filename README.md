@@ -78,3 +78,7 @@ This is a systems-focused prototype intended to demonstrate gameplay architectur
 - State-safe architecture
 - Combat loop understanding (attack ↔ defense)
 - Clear integration between animation and gameplay logic
+- 
+- External assets were removed to keep the repository lightweight.
+
+This project focuses on gameplay systems and logic implementation.
