@@ -51,10 +51,12 @@ public:
 
     //
     UFUNCTION(BlueprintCallable, Category = "Ability")
-    virtual void Init(UAbilityDefinition* InDefinition);
+    virtual void Init(UAbilityDefinition* InDefinition, ACharacter* InCharacter);
 
 
     UFUNCTION(BlueprintCallable)
     virtual void DebugPing();
 
+    UFUNCTION(BlueprintCallable)
+    virtual bool IsActive();
 };
