@@ -13,6 +13,20 @@ void UAbilityBaseCpp::ActivateAbility()
 {
     if (!CanActivate())
     {
+        if (!Definition)
+        {
+            UE_LOG(LogTemp, Error, TEXT("Definition is NULL"));
+        }
+
+        if (!Definition->Montage)
+        {
+            UE_LOG(LogTemp, Error, TEXT("Montage is NULL"));
+        }
+
+        if (!OwnerCharacter)
+        {
+            UE_LOG(LogTemp, Error, TEXT("OwnerCharacter is NULL"));
+        }
         UE_LOG(LogTemp, Warning, TEXT("CanActivate FAILED"));
         return;
     }
@@ -22,7 +36,7 @@ void UAbilityBaseCpp::ActivateAbility()
     UE_LOG(LogTemp, Warning, TEXT("Activated"));
 
     //Verificar se Defnition, montage e character está null
-    if (!Definition)
+    /*if (!Definition)
     {
         UE_LOG(LogTemp, Error, TEXT("Definition is NULL"));
     }
@@ -35,7 +49,7 @@ void UAbilityBaseCpp::ActivateAbility()
     if (!OwnerCharacter)
     {
         UE_LOG(LogTemp, Error, TEXT("OwnerCharacter is NULL"));
-    }
+    }*/
 
     //////////////////////////////////////////////
 
@@ -59,14 +73,20 @@ void UAbilityBaseCpp::ExecuteHit()
     // Base: não faz nada. Implementação nas filhas.
 }
 
-void UAbilityBaseCpp::Init(UAbilityDefinition* InDefinition)
+void UAbilityBaseCpp::Init(UAbilityDefinition* InDefinition, ACharacter* InCharacter)
 {
     // Base: não faz nada. Implementação nas filhas.
     UE_LOG(LogTemp, Error, TEXT("Init"));
     Definition = InDefinition;
+    OwnerCharacter = InCharacter;
 }
 
 void UAbilityBaseCpp::DebugPing()
 {
     UE_LOG(LogTemp, Warning, TEXT("DEBUG PING WORKING"));
+}
+
+bool UAbilityBaseCpp::IsActive()
+{
+    return bIsActive;
 }
