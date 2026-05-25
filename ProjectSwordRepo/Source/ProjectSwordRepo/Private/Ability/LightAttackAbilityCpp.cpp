@@ -1,6 +1,6 @@
 #include "Ability/LightAttackAbilityCpp.h"
 
-#include "UAbilityDefinition.h"              // sua UAbilityDefinition
+#include "UAbilityDefinition.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "CollisionShape.h"
@@ -53,13 +53,16 @@ void ULightAttackAbilityCpp::ExecuteHit()
         );
     }
 
-    //Encerrar após o hit (ou controlar via montage end event)
-    EndAbility();
-    UE_LOG(LogTemp, Warning, TEXT("ExecuteHit in LightAbilityCPP"));
+    //EndAbility();
+    //UE_LOG(LogTemp, Warning, TEXT("ExecuteHit in LightAbilityCPP"));
 }
 
 /*void ULightAttackAbilityCpp::Init(UAbilityDefinition* InDefinition)
 {
     Definition = InDefinition;
 }*/
+
+
+
+
 

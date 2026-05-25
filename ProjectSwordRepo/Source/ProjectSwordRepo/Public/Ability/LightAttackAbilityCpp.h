@@ -17,5 +17,6 @@ class PROJECTSWORDREPO_API ULightAttackAbilityCpp : public UAbilityBaseCpp
 
 public:
     virtual void ExecuteHit() override;
-    //virtual void Init(UAbilityDefinition* InDefinition) override;
+
+    //
 };

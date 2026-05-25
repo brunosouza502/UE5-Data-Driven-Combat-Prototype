@@ -16,6 +16,7 @@ class PROJECTSWORDREPO_API UAbilityBaseCpp : public UObject
     GENERATED_BODY()
 
 public:
+
     /** Character that owns/executes this ability (set by the AbilitySystemComponent). */
     UPROPERTY(BlueprintReadOnly, Category = "Ability")
     TObjectPtr<ACharacter> OwnerCharacter = nullptr;
@@ -59,4 +60,12 @@ public:
 
     UFUNCTION(BlueprintCallable)
     virtual bool IsActive();
+
+    //
+    UFUNCTION()
+    void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+    UFUNCTION(BlueprintCallable, Category = "Ability")
+    virtual void TryActivateAbility();
+
 };

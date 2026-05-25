@@ -4,6 +4,8 @@
 #include "Animation/AnimInstance.h"
 #include "UAbilityDefinition.h"
 
+
+
 bool UAbilityBaseCpp::CanActivate() const
 {
     return !bIsActive && OwnerCharacter && Definition;
@@ -13,20 +15,6 @@ void UAbilityBaseCpp::ActivateAbility()
 {
     if (!CanActivate())
     {
-        if (!Definition)
-        {
-            UE_LOG(LogTemp, Error, TEXT("Definition is NULL"));
-        }
-
-        if (!Definition->Montage)
-        {
-            UE_LOG(LogTemp, Error, TEXT("Montage is NULL"));
-        }
-
-        if (!OwnerCharacter)
-        {
-            UE_LOG(LogTemp, Error, TEXT("OwnerCharacter is NULL"));
-        }
         UE_LOG(LogTemp, Warning, TEXT("CanActivate FAILED"));
         return;
     }
@@ -35,22 +23,6 @@ void UAbilityBaseCpp::ActivateAbility()
 
     UE_LOG(LogTemp, Warning, TEXT("Activated"));
 
-    //Verificar se Defnition, montage e character está null
-    /*if (!Definition)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Definition is NULL"));
-    }
-
-    if (!Definition->Montage)
-    {
-        UE_LOG(LogTemp, Error, TEXT("Montage is NULL"));
-    }
-
-    if (!OwnerCharacter)
-    {
-        UE_LOG(LogTemp, Error, TEXT("OwnerCharacter is NULL"));
-    }*/
-
     //////////////////////////////////////////////
 
     // Se tiver montage na definição, toca.
@@ -58,7 +30,13 @@ void UAbilityBaseCpp::ActivateAbility()
     {
         if (UAnimInstance* AnimInst = OwnerCharacter->GetMesh()->GetAnimInstance())
         {
-            AnimInst->Montage_Play(Definition->Montage);            
+            AnimInst->Montage_Play(Definition->Montage);
+
+            //Final da montage
+            FOnMontageEnded EndDelegate;
+            EndDelegate.BindUObject(this, &UAbilityBaseCpp::OnMontageEnded);
+            AnimInst->Montage_SetEndDelegate(EndDelegate, Definition->Montage);
+            ////
         }
     }
 }
@@ -90,3 +68,30 @@ bool UAbilityBaseCpp::IsActive()
 {
     return bIsActive;
 }
+
+
+//Montage ended
+void UAbilityBaseCpp::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+    if (Definition && Montage == Definition->Montage)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Montage finished -> EndAbility()"));
+        EndAbility();
+    }
+}
+
+
+//Chama primeiro
+void UAbilityBaseCpp::TryActivateAbility()
+{
+    if (!CanActivate())
+    {
+        UE_LOG(LogTemp, Warning, TEXT("TryActivate FAILED"));
+        return;
+    }
+
+    ActivateAbility();
+    
+}
+
+
