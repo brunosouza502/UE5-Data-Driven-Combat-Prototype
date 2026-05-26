@@ -3,13 +3,23 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
+#include "SwordDefinition.generated.h"
 
 /**
  * 
  */
-class PROJECTSWORDREPO_API SwordDefinition
+UCLASS(BlueprintType)
+class PROJECTSWORDREPO_API USwordDefinition : public UDataAsset
 {
+	GENERATED_BODY()
 public:
-	SwordDefinition();
-	~SwordDefinition();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sword")
+	float Damage = 30.f;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sword")
+	TObjectPtr<UStaticMesh> SwordMesh = nullptr;
+
 };
