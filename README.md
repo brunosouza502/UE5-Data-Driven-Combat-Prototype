@@ -78,7 +78,6 @@ This is a systems-focused prototype intended to demonstrate gameplay architectur
 - State-safe architecture
 - Combat loop understanding (attack ↔ defense)
 - Clear integration between animation and gameplay logic
-- 
 - External assets were removed to keep the repository lightweight.
 
 This project focuses on gameplay systems and logic implementation.
@@ -87,3 +86,20 @@ This is a stripped version of the project.
 - Retargeted player animations were not included due to size constraints
 - - The focus of this repository is gameplay systems, not visual assets
 
+
+## Updates
+
+Implemented ASwordBase as an Actor class responsible for:
+
+- Representing the sword visually in the game world.
+- Applying the mesh from the Data Asset at runtime.
+- Holding runtime references (OwnerCharacter, Definition).
+
+Light Attack (C++)
+A Light Attack system has been implemented in C++, providing a more robust and scalable combat foundation.
+
+- The attack logic is handled entirely in C++ for better performance and control.
+- Integrated with the existing Ability system.
+- Uses animation notify events to trigger hit execution during the attack.
+- Designed to be easily extended for future combat features (combos, heavy attacks, etc.).
+- Activate: CTRL + LMB
